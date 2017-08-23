@@ -16,7 +16,7 @@ library(dplyr)
 library(tidyr)
 
 #set working directory
-wd <- "/Users/ericashelton/Documents/DataScience/practical_statistics/medicare/Medicare_Provider_Util_Payment_PUF_CY2015" #specify directory to download data
+wd <- "/Users/user1/Documents" #specify directory to download data
 setwd(wd)
 
 set.seed(32541)

@@ -91,7 +91,7 @@ pct_var_chart <- ggplot(data = pct_var, aes(x = num_clusters, y = pct_var)) +
 print(pct_var_chart)
 print(pct_var)
 
-
+#run k-means analysis
 k1 <- 8
 km1 <- kmeans(final, centers = k1, nstart = 10)
 clusters <- data.table(npi = npi, cluster = as.factor(km1$cluster))
@@ -107,7 +107,7 @@ centers <- gather(centers, "Cluster", "Mean", -Symbol)
 centers$Color = centers$Mean > 0
 centers <- subset(centers, Symbol != "cluster")
 
-
+#function to view the details of different clusters. x = the cluster number to view (e.g., 1)
 cluster_details <- function(x) {
   t <- ca[npi %in% clusters[cluster == x]$npi]
   print(paste0("Number of unique NPIs: ", nrow(t[which(!duplicated(t$npi))])))
@@ -115,6 +115,9 @@ cluster_details <- function(x) {
   print(t)
 }
 
+#function to view the HCPCS code utilization differences between the different clusters, displaying only the HCPCS codes of the focal cluster.
+# x = the cluster number to view
+# y = the variable to display (e.g., "lines_per_bene")
 cluster_chart <- function(x, y) {
   t <- ca[npi %in% clusters[cluster == x]$npi]$hcpcs_code
   u <- centers[grepl(paste(t, collapse = "|"), centers$Symbol) == TRUE & grepl(y, centers$Symbol) == TRUE, ]
@@ -132,4 +135,7 @@ cluster_chart <- function(x, y) {
 }
 
 cluster_chart(which.max(km1$size), "lines_per_bene")
-km1$size
+
+cluster_sizes <- data.frame(cluster = c(1:length(km1$size)),
+                            provider_count = km1$size)
+print(cluster_sizes, row.names = FALSE)

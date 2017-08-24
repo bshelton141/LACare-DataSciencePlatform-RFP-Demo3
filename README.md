@@ -9,4 +9,4 @@ The goal of the script is to identify providers whose billing patterns differ dr
 - Clustering
 - Data Visualization
 
-If capable, vendors are encouraged to demonstrate their solutions' abilities to run the same model and produce similar outputs in a GUI/drag-and-drop type modeling environment.
+If capable, vendors are encouraged to demonstrate their solutions' abilities to run the same model and produce similar outputs in a GUI/drag-and-drop type modeling environment (in addition to executing the provided script).
